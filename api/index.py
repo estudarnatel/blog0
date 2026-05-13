@@ -29,6 +29,9 @@ from mangum import Mangum
 # APP
 # ======================================================
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 app = FastAPI()
 
 # ======================================================
@@ -66,11 +69,7 @@ app.add_middleware(
 # ======================================================
 
 # templates = Jinja2Templates(directory=".")
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-templates = Jinja2Templates(
-    directory=str(BASE_DIR)
-)
 
 app.mount(
     "/CSS",
@@ -82,6 +81,11 @@ app.mount(
     "/JS",
     StaticFiles(directory=str(BASE_DIR / "JS")),
     name="js"
+)
+
+
+templates = Jinja2Templates(
+    directory=str(BASE_DIR)
 )
 
 # ======================================================
